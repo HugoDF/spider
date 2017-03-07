@@ -1,0 +1,15 @@
+# COMPM052 Spider Scrapy
+
+# Setup
+
+Need sqlite3, python 2.7 and pip
+
+Run `sqlite3 urls.db`, run this query to create the urls table:
+```sql
+CREATE TABLE urls (url STRING);
+```
+
+Run `pip install scrapy`.
+
+To start the spider:
+`scrapy runspider scrape.py`
