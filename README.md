@@ -6,7 +6,7 @@ Need sqlite3, python 2.7 and pip
 
 Run `sqlite3 urls.db`, run this query to create the urls table:
 ```sql
-CREATE TABLE urls (url STRING);
+CREATE TABLE urls (url STRING, content TEXT);
 ```
 
 Run `pip install scrapy`.
