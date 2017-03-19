@@ -1,9 +1,7 @@
 # Running
 
-Need Python 2.7
+Requires Python 2.7 & database from scraper
 
-Create dir inside the dir you are running textBased.py from.
+After running scraper, run `python index.py`
 
-Store some HTML files- can create subdirectories too.
-
-Run `python textBased.py`
+Then run `python textBased.py argv1 argv2` etc

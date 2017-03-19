@@ -1,28 +1,33 @@
-import urllib, urllib2
-import os, os.path
+import sqlite3, sys, operator, os
 
-def search(rootDir, searchTerm):
-	fileList = []
+os.system('reset')
 
-	for root, dirs, files in os.walk(rootDir):
-		for file in files:
-			if file.endswith(".html"):
-				sock = urllib.urlopen(os.path.join(root, file))
-				htmlSource = sock.read()
-				sock.close()
-				searchIndex = int(htmlSource.find(searchTerm, 0))
-				searchTotal = int(0)
-				while searchIndex != -1:
-					searchIndex = int(htmlSource.find(searchTerm, searchIndex + len(searchTerm)))
-					searchTotal += 1
-				for listIndex in range(0, len(fileList) + 1):
-					if listIndex == len(fileList):
-						fileList.insert(listIndex, (searchTotal, os.path.join(root, file)))
-						break
-					elif searchTotal > fileList[listIndex][0]:
-						fileList.insert(listIndex, (searchTotal, os.path.join(root, file)))
-						break
-						
-	return fileList
+conn = sqlite3.connect('urls.db')
+c = conn.cursor()
 
-fileList = search("Python", "news")
+def search(c, terms):
+	fileList = {}
+	for a in range(0, len(terms)):
+		searchTerm = terms[a]
+		c.execute("SELECT url, count FROM " + searchTerm)
+		results = c.fetchall()
+		for b in range(0, len(results)):
+			url = results[b][0]
+		 	matches = results[b][1]
+		 	if url in fileList:
+		 		fileList[url] += matches
+		 	else:
+		 		fileList[url] = matches
+
+	returnList = sorted(fileList.items(), key=operator.itemgetter(1), reverse=True)
+	return returnList
+
+terms = []
+
+for i in range (1, len(sys.argv)):
+	terms.append(sys.argv[i])
+
+if terms == []:
+	print 'No Arguments Applied'
+else:
+	print search(c, terms)
