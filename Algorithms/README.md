@@ -1,7 +1,23 @@
 # Running
 
-Requires Python 2.7 & database from scraper
+## Requires Scraper
 
-After running scraper, run `python index.py`
+Install scraper dependencies and run.
 
-Then run `python textBased.py argv1 argv2` etc
+## Installation
+
+`pip install whoosh`
+
+Create dir `indexdir`
+
+## Running
+
+For one Algorithm `python search.py ALG CON TERMS`
+
+For all Algorithms `python searchCompare.py CON TERMS`
+
+ALG = BM25F, Frequency, TF_IDF
+
+CON = OR, AND
+
+TERMS = *anything*
