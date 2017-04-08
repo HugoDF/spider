@@ -1,4 +1,7 @@
+import sqlite3
 import numpy as np
+conn = sqlite3.connect('urls.db')
+c = conn.cursor()
 
 def pageRank(graph_matrix, damping_factor = 0.85, max_error = 0.00001):
     M = stochasticMatrix(graph_matrix)
@@ -49,7 +52,30 @@ def distance(v1, v2):
     v = v * v
     return np.sum(v)
 
+def graphMatrix():
+    c.execute('SELECT COUNT(*) FROM urls')
+    total_pages = c.fetchall()[0][0]
+    matrix = np.zeros((total_pages, total_pages))
+
+    c.execute('SELECT rowid, links FROM urls')
+    data = c.fetchall()
+    for element in data:
+        i = element[0]
+        outlinks = element[1].split()
+        outlinks = ','.join(outlinks)
+
+        # Find rowid for each outlink
+        c.execute('SELECT rowid FROM urls WHERE url IN (?)',[ outlinks ])
+        positions = c.fetchall()
+        for position in positions:
+            j = position[0]
+            matrix[j][i] = 1
+    
+    return matrix
+
+
 if __name__=='__main__':
 
-    G = np.array([[0,1,0],[1,1,0],[1,0,0]])
-    print (pageRank(G))
+    print(graphMatrix())
+    #G = np.array([[0,1,0],[1,1,0],[1,0,0]])
+    #print (pageRank(G))
