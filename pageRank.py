@@ -73,9 +73,16 @@ def graphMatrix():
     
     return matrix
 
+def insertPageRankDB(ranking):
+    num_pages = len(ranking)
+    for i in range(num_pages):
+        rank = ranking[i]
+        c.execute('UPDATE urls SET pageRank = ? WHERE rowid = ?', [ rank, i ])
+        conn.commit()
+
 
 if __name__=='__main__':
 
-    print(graphMatrix())
-    #G = np.array([[0,1,0],[1,1,0],[1,0,0]])
-    #print (pageRank(G))
+    matrix = graphMatrix()
+    ranking = pageRank(matrix)
+    insertPageRankDB(ranking)
