@@ -27,8 +27,12 @@ class UclSpider(scrapy.Spider):
 			links = ""
 			for link in soup.find_all('a'):
 	    			link_url = link.get('href')
-	    			if "cs.ucl.ac.uk" in link_url:
+	    			if "http" in link_url:
+		    			if "cs.ucl.ac.uk" in link_url:
 	    					links = links + " " + link_url
+	    			else:
+	    				link_url = "http://cs.ucl.ac.uk/" + link_url
+	    				links = links + " " + link_url
 
 			c.execute('INSERT INTO urls (url, content, links) VALUES (?, ?, ?)', [ response.url, text.lower(), links ])
 			conn.commit()
