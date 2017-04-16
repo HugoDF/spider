@@ -60,15 +60,15 @@ def graphMatrix():
     c.execute('SELECT rowid, links FROM urls')
     data = c.fetchall()
     for element in data:
-        i = element[0]
+        i = element[0] - 1
         outlinks = element[1].split()
-        outlinks = ','.join(outlinks)
 
         # Find rowid for each outlink
-        c.execute('SELECT rowid FROM urls WHERE url IN (?)',[ outlinks ])
+        query = "SELECT rowid from urls WHERE url IN ({seq})".format(seq=','.join(['?']*len(outlinks)))
+        c.execute(query, outlinks)
         positions = c.fetchall()
         for position in positions:
-            j = position[0]
+            j = position[0] - 1
             matrix[j][i] = 1
     
     return matrix
@@ -77,7 +77,7 @@ def insertPageRankDB(ranking):
     num_pages = len(ranking)
     for i in range(num_pages):
         rank = ranking[i]
-        c.execute('UPDATE urls SET pageRank = ? WHERE rowid = ?', [ rank, i ])
+        c.execute('UPDATE urls SET pageRank = ? WHERE rowid = ?', [ rank, i+1 ])
         conn.commit()
 
 

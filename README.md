@@ -13,3 +13,6 @@ Run `pip install scrapy`.
 
 To start the spider:
 `scrapy runspider scrape.py`
+
+To enable PageRank:
+`python pageRank.py`

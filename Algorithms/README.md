@@ -12,11 +12,13 @@ Create dir `indexdir`
 
 ## Running
 
-For one Algorithm `python search.py ALG CON TERMS`
+For one Algorithm `python search.py ALG (PageRank) CON TERMS`
 
 For all Algorithms `python searchCompare.py CON TERMS`
 
 ALG = BM25F, Frequency, TF_IDF
+
+PagaRank = Optional, default as False. If 'PageRank' is included, results would be return based on the ranking of the pages in descending order.
 
 CON = OR, AND
 
