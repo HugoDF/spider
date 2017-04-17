@@ -15,6 +15,7 @@ def pageRank(graph_matrix, damping_factor = 0.85, max_error = 0.00001):
     while True:
         ranking = np.dot(initial,old_ranking)
         dist = distance(ranking, old_ranking)
+        print('Difference: ' + str(dist))
         if dist < max_error:
             break
         else:
@@ -31,6 +32,7 @@ def stochasticMatrix(graph_matrix):
         for j in range(num_pages):
             if (graph_matrix[j, i] == 1):
                 d[i] += 1
+
         if d[i] == 0:   # dead end, assume go to all links
             d[i] = num_pages
 
@@ -59,10 +61,23 @@ def graphMatrix():
 
     c.execute('SELECT rowid, links FROM urls')
     data = c.fetchall()
+    count = 0
     for element in data:
+        count += 1
+        print("Processing: " + str(count) + "/" + str(total_pages))
         i = element[0] - 1
         outlinks = element[1].split()
+        print(len(outlinks))
 
+        matrix = updateMatrix(matrix,outlinks,i)
+    
+    return matrix
+
+def updateMatrix(matrix, outlinks, i):
+    if len(outlinks) > 500:
+        matrix = updateMatrix(matrix,outlinks[0:500],i)
+        matrix = updateMatrix(matrix,outlinks[501:(len(outlinks)-1)],i)
+    else:
         # Find rowid for each outlink
         query = "SELECT rowid from urls WHERE url IN ({seq})".format(seq=','.join(['?']*len(outlinks)))
         c.execute(query, outlinks)
@@ -76,13 +91,18 @@ def graphMatrix():
 def insertPageRankDB(ranking):
     num_pages = len(ranking)
     for i in range(num_pages):
+        print("Inserting: " + str(i) + "/" + str(num_pages))
         rank = ranking[i]
         c.execute('UPDATE urls SET pageRank = ? WHERE rowid = ?', [ rank, i+1 ])
         conn.commit()
 
 
-if __name__=='__main__':
+if __name__=='__main__':    
 
+    print('Constructing matrix from database...')
     matrix = graphMatrix()
+    print('Computing PageRank...')
     ranking = pageRank(matrix)
+    print('Inserting PageRank into database')
     insertPageRankDB(ranking)
+    print('Done!')
