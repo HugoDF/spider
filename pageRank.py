@@ -4,7 +4,8 @@ conn = sqlite3.connect('urls.db')
 c = conn.cursor()
 
 def pageRank(graph_matrix, damping_factor = 0.85, max_error = 0.00001):
-    M = stochasticMatrix(graph_matrix)
+    M = graph_matrix
+    #M = stochasticMatrix(graph_matrix)
 
     num_pages = len(graph_matrix)
     ranking = np.ones(num_pages)
@@ -67,7 +68,6 @@ def graphMatrix():
         print("Processing: " + str(count) + "/" + str(total_pages))
         i = element[0] - 1
         outlinks = element[1].split()
-        print(len(outlinks))
 
         matrix = updateMatrix(matrix,outlinks,i)
     
@@ -101,8 +101,9 @@ if __name__=='__main__':
 
     print('Constructing matrix from database...')
     matrix = graphMatrix()
-    print('Computing PageRank...')
-    ranking = pageRank(matrix)
-    print('Inserting PageRank into database')
-    insertPageRankDB(ranking)
+    stochasticMatrix(matrix)
+    #print('Computing PageRank...')
+    #ranking = pageRank(matrix)
+    #print('Inserting PageRank into database')
+    #insertPageRankDB(ranking)
     print('Done!')
