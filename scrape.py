@@ -26,19 +26,20 @@ class UclSpider(scrapy.Spider):
 
 			links = ""
 			for link in soup.find_all('a'):
-	    			link_url = link.get('href')
-	    			if "http" in link_url:
-		    			if "cs.ucl.ac.uk" in link_url:
-	    					links = links + " " + link_url
-	    			else:
-	    				link_url = "http://cs.ucl.ac.uk/" + link_url
-	    				links = links + " " + link_url
+					link_url = link.get('href')
+					if "http" in link_url:
+						if "cs.ucl.ac.uk" in link_url:
+							links = links + " " + link_url
+					else:
+						link_url = "http://cs.ucl.ac.uk/" + link_url
+						links = links + " " + link_url
 
 			c.execute('INSERT INTO urls (url, content, links) VALUES (?, ?, ?)', [ response.url, text.lower(), links ])
 			conn.commit()
 
 			next_page = response.css('a ::attr(href)').extract()
 			for page in next_page:
+				page = page.lower()
 				if "digital-collections" in page or "metalib" in page:
 					continue
 				else:

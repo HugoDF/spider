@@ -16,4 +16,4 @@ def count():
         conn.commit()
 
 if __name__=='__main__':
-    count();
+    count()
