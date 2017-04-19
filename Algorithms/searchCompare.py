@@ -5,13 +5,15 @@ from whoosh.index import open_dir
 import os
 
 def searchTerm(list):
-	connector = list[2]
+	connector = list[1]
 	term = ''
 
-	for i in range (3, len(list) - 1):
+	for i in range (2, len(list) - 1):
 		term += list[i] + ' ' + connector + ' '
 
-	term += list[-1]
+	term += list[len(list) - 1]
+
+	print "Search Term: " + term
 
 	return term
 
@@ -86,10 +88,10 @@ def searchInit(list):
 		return
 	print 'Incorrect Connector'
 
-os.system('clear')
+if __name__ == '__main__':
+	os.system('clear')
 
-if len(sys.argv) < 3:
-	print 'Insufficient Arguments'
-else:
-	print "Starting Query"
-	searchInit(sys.argv)
+	if len(sys.argv) < 3:
+		print 'Insufficient Arguments'
+	else:
+		searchInit(sys.argv)

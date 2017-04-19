@@ -39,15 +39,11 @@ def getPageRank(orders,lists):
     
     return orders
 
-def showResult(results,pageRank,num):
-        count = 0
-
+def makeResults(results,pageRank,num):
         if pageRank == False:
-            for r in results:
-                count += 1
+            for r in results[:num]:
                 print (r['title'])
-                if count == num:
-                    break
+            return map(lambda r: r['title'], results[:num])
         else:
             lists = ""
             for r in results:
@@ -60,11 +56,9 @@ def showResult(results,pageRank,num):
             orders = []
             orders = getPageRank(orders,lists)
             sorted(orders, key=lambda x: x[1])
-            for order in orders:
-                    count += 1
-                    print (order[0])
-                    if count == num:
-                            break
+            for order in orders[:num]:
+                print (order[0])
+            return map(lambda order: order[0], orders[:num])
 
 def search(ix, term, algorithm, pageRank=False):
     if algorithm == 'BM25F':
@@ -73,7 +67,7 @@ def search(ix, term, algorithm, pageRank=False):
             query = QueryParser('content', ix.schema).parse(term)
             results = searcher.search(query, limit=1000)
 
-            showResult(results,pageRank,25)
+            return makeResults(results,pageRank,25)
         return
 
     if algorithm == 'Frequency':
@@ -82,7 +76,7 @@ def search(ix, term, algorithm, pageRank=False):
             query = QueryParser('content', ix.schema).parse(term)
             results = searcher.search(query, limit=1000)
 
-            showResult(results,pageRank,25)
+            return makeResults(results,pageRank,25)
         return
 
     if algorithm == 'TF_IDF':
@@ -91,7 +85,7 @@ def search(ix, term, algorithm, pageRank=False):
             query = QueryParser('content', ix.schema).parse(term)
             results = searcher.search(query, limit=1000)
 
-            showResult(results,pageRank,25)
+            return makeResults(results,pageRank,25)
         return
 
     print ('Incorrect Alogrithm')
@@ -105,10 +99,10 @@ def searchInit(list):
     else:
         print ('Incorrect Connector')
 
-os.system('clear')
-
-if len(sys.argv) < 4:
-    print ('Insufficient Arguments')
-else:
-    print ("Starting Query")
-    searchInit(sys.argv)
+if __name__ == '__main__':
+	os.system('clear')
+	if len(sys.argv) < 4:
+		print 'Insufficient Arguments'
+	else:
+		print "Starting Query"
+		searchInit(sys.argv)
