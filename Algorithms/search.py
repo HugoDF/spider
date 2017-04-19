@@ -42,8 +42,6 @@ def getPageRank(orders,lists):
 def showResult(results,pageRank,num):
         count = 0
 
-        print results
-
         if pageRank == False:
             for r in results:
                 count += 1
