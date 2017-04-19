@@ -80,9 +80,9 @@ def search(ix, term):
 	print difference
 
 def searchInit(list):
-	if sys.argv[1] == 'OR' or sys.argv[1] == 'AND':
+	if list[1] == 'OR' or list[1] == 'AND':
 		print "Query Collected"
-		search(index(), searchTerm(sys.argv))
+		search(index(), searchTerm(list))
 		return
 	print 'Incorrect Connector'
 
