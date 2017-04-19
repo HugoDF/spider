@@ -13,6 +13,8 @@ def searchTerm(list):
 
 	term += list[-1]
 
+	print term
+
 	return term
 
 def index():
@@ -80,16 +82,16 @@ def search(ix, term):
 	print difference
 
 def searchInit(list):
-	if sys.argv[1] == 'OR' or sys.argv[1] == 'AND':
+	if list[1] == 'OR' or list[1] == 'AND':
 		print "Query Collected"
-		search(index(), searchTerm(sys.argv))
+		search(index(database()), searchTerm(list))
 		return
 	print 'Incorrect Connector'
 
-os.system('clear')
+if __name__ == '__main__':
+	os.system('clear')
 
-if len(sys.argv) < 3:
-	print 'Insufficient Arguments'
-else:
-	print "Starting Query"
-	searchInit(sys.argv)
+	if len(sys.argv) < 3:
+		print 'Insufficient Arguments'
+	else:
+		searchInit(sys.argv)
