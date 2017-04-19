@@ -5,15 +5,15 @@ from whoosh.index import open_dir
 import os
 
 def searchTerm(list):
-	connector = list[2]
+	connector = list[1]
 	term = ''
 
-	for i in range (3, len(list) - 1):
+	for i in range (2, len(list) - 1):
 		term += list[i] + ' ' + connector + ' '
 
-	term += list[-1]
+	term += list[len(list) - 1]
 
-	print term
+	print "Search Term: " + term
 
 	return term
 
