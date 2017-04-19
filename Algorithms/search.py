@@ -30,7 +30,8 @@ def search(ix, term, algorithm):
 
 			for r in results:
 				print r['title']
-		return
+			
+			return map(lambda r: r['title'], results)
 
 	if algorithm == 'Frequency':
 		print "Frequency Search"
@@ -40,7 +41,9 @@ def search(ix, term, algorithm):
 
 			for r in results:
 				print r['title']
-		return
+
+			
+			return map(lambda r: r['title'], results)
 
 	if algorithm == 'TF_IDF':
 		print "TF_IDF Search"
@@ -50,22 +53,23 @@ def search(ix, term, algorithm):
 
 		    for r in results:
 		    	print r['title']
-		return
+			
+			return map(lambda r: r['title'], results)
 
 	print 'Incorrect Alogrithm'
 
 def searchInit(list):
-	algorithm = sys.argv[1]
-	if sys.argv[2] == 'OR' or sys.argv[2] == 'AND':
+	algorithm = list[1]
+	if list[2] == 'OR' or list[2] == 'AND':
 		print "Query Collected"
-		search(index(), searchTerm(sys.argv), algorithm)
-		return
+		return search(index(), searchTerm(list), algorithm)
 	print 'Incorrect Connector'
 
-os.system('clear')
+if __name__ == '__main__':
+	os.system('clear')
 
-if len(sys.argv) < 4:
-	print 'Insufficient Arguments'
-else:
-	print "Starting Query"
-	searchInit(sys.argv)
+	if len(sys.argv) < 4:
+		print 'Insufficient Arguments'
+	else:
+		print "Starting Query"
+		searchInit(sys.argv)

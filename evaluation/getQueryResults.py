@@ -29,11 +29,9 @@ def getResults(query):
     results = transformRawResults(rawResults)
     return results
 
-queries = [ 'undergraduate syllabus', '2017 PhDs', 'COMPM052', 'information retrieval', '4th year modules', 'master programmes' ]
-queryToResults = {}
-for query in queries:
-    results = getResults(query)
-    queryToResults[query] = results
-
-with open('./queryresults/queriesToResults.json', 'w') as outfile:
-    json.dump(queryToResults, outfile)
+def getQueryToResults(queries):
+    queryToResults = {}
+    for query in queries:
+        results = getResults(query)
+        queryToResults[query] = results
+    return queryToResults
