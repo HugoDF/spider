@@ -84,7 +84,7 @@ def search(ix, term):
 def searchInit(list):
 	if list[1] == 'OR' or list[1] == 'AND':
 		print "Query Collected"
-		search(index(database()), searchTerm(list))
+		search(index(), searchTerm(list))
 		return
 	print 'Incorrect Connector'
 
