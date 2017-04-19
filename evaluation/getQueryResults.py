@@ -29,7 +29,7 @@ def getResults(query):
     results = transformRawResults(rawResults)
     return results
 
-queries = [ 'undergraduate curriculum', '2017 PhDs', 'COMPM052', 'information retrieval', '4th year modules', 'master programmes' ]
+queries = [ 'undergraduate syllabus', '2017 PhDs', 'COMPM052', 'information retrieval', '4th year modules', 'master programmes' ]
 queryToResults = {}
 for query in queries:
     results = getResults(query)
