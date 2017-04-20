@@ -93,9 +93,9 @@ def search(ix, term, algorithm, pageRank=False):
 def searchInit(list):
     algorithm = list[1]
     if (list[2] == 'PageRank') and (list[3] == 'OR' or list[3] == 'AND'):
-        search(index(), searchTerm(list,3), algorithm, True)
+        return search(index(), searchTerm(list,3), algorithm, True)
     elif list[2] == 'OR' or list[2] == 'AND':
-        search(index(), searchTerm(list,2), algorithm, False)
+        return search(index(), searchTerm(list,2), algorithm, False)
     else:
         print ('Incorrect Connector')
 
