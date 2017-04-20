@@ -43,5 +43,3 @@ Rough working implementations of different rank/relevance metrics: [https://gist
 
 We can also use the CS Search as an oracle for relevance. IE if a result for a query is returned by the CS Search, then it is relevant. This is a binary relevance measure, we can apply x and y methods to it.
 
-According to these metrics, we observe x, y and z.
-

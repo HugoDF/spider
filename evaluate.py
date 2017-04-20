@@ -30,31 +30,31 @@ for query in queries:
     print "Query: " + query
     print "---------------------"
     
-    print "BM25F"
-    printList(bm25F)
-    print "---------------------"
+    # print "BM25F"
+    # printList(bm25F)
+    # print "---------------------"
     
     print "BM25F PageRank"
     printList(bm25FPageRank)
     print "---------------------"
     
-    print "Frequency"
-    printList(freq)
-    print "---------------------"
+    # print "Frequency"
+    # printList(freq)
+    # print "---------------------"
     
     print "Frequency PageRank"
     printList(freqPageRank)
     print "---------------------"
     
-    print "TF_IDF"
-    printList(tfIdf)
-    print "---------------------"
+    # print "TF_IDF"
+    # printList(tfIdf)
+    # print "---------------------"
     
     print "TF_IDF PageRank"
     printList(tfIdfPageRank)
-    print "---------------------"
+    # print "---------------------"
 
-    print "CS Search"
-    printList(csResults)
+    # print "CS Search"
+    # printList(csResults)
 
     print "====================="
