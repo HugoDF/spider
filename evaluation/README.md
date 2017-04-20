@@ -39,7 +39,11 @@ We then run through Normalized Discounted Cumulative Gain [http://www.ebaytechbl
 
 Rough working implementations of different rank/relevance metrics: [https://gist.github.com/bwhite/3726239](https://gist.github.com/bwhite/3726239).
 
-### Automatic relevance rating of query results
+### Further work
 
-We can also use the CS Search as an oracle for relevance. IE if a result for a query is returned by the CS Search, then it is relevant. This is a binary relevance measure, we can apply x and y methods to it.
-
+- we could write more queries to test
+- we could measure recall (this would require manually tagging a large set of documents): recall: fraction of relevant instances that are retrieved vs precision: fraction of retrieved instances that are relevant
+- if we had users we could use click and query logs to improve performance
+- removal of "/mobile" urls, cons: some pages for mobile/desktop have difference content
+- deduplication of URLs that are the same different case eg. "http://www0.cs.ucl.ac.uk/staff/y.jia/publications.html" and "http://www0.cs.ucl.ac.uk/staff/Y.Jia/publications.html", cons: see removal of "/mobile" links
+- to create an automatic relevance rating system we could use the CS Search as an oracle for relevance. IE if a result for a query is returned by the CS Search, then it is relevant. This is a binary relevance measure, as opposed to our manual approach.
