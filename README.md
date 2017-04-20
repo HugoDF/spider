@@ -19,7 +19,4 @@ To start the spider:
 
 To enable PageRank:
     Generate incoming links for the database: `python makeIncomingLinks.py`
-    To get incomingLinks, you must use something along the lines of: 
-    `SELECT incomingLinks FROM urls LEFT JOIN incomingLinks ON urls.rowid = incomingLinks.urlId`
-    Update the database: `python updateDatabase.py`
-    Run the algorithm: `python pageRank2.py`
+    Run the algorithm: `python pageRank.py`
