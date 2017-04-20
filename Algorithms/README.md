@@ -12,7 +12,7 @@ Create dir `indexdir`
 
 ## Running
 
-For one Algorithm `python search.py ALG CON TERMS`
+For one Algorithm `python search.py ALG (PageRank) CON TERMS`
 
 ALG = BM25F || TF_IDF || Frequency
 CON = OR || AND
