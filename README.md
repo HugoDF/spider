@@ -1,25 +1,28 @@
-# COMPM052 Spider Scrapy
+# Running
 
-# Setup
+## Requires Scraper
 
-Need sqlite3, python 2.7 and pip
+Install scraper dependencies and run.
 
-Run `sqlite3 urls.db`, run this query to create the urls table:
-```sql
-CREATE TABLE urls (url STRING, content TEXT, links STRING, pageRank REAL, amount INTEGER);
-CREATE INDEX contentIndex ON urls (content);
-CREATE TABLE incomingLinks (urlId INTEGER, incomingLinks STRING);
-CREATE INDEX incomingLinksUrlId on incomingLinks (urlId);
-```
+## Installation
 
-Run `pip install scrapy`.
+`pip install whoosh`
 
-To start the spider:
-`scrapy runspider scrape.py`
+Create dir `indexdir`
 
-To enable PageRank:
-    Generate incoming links for the database: `python makeIncomingLinks.py`
-    To get incomingLinks, you must use something along the lines of: 
-    `SELECT incomingLinks FROM urls LEFT JOIN incomingLinks ON urls.rowid = incomingLinks.urlId`
-    Update the database: `python updateDatabase.py`
-    Run the algorithm: `python pageRank2.py`
+## Running
+
+For one Algorithm `python search.py ALG (PageRank) CON TERMS`
+
+ALG = BM25F || TF_IDF || Frequency
+CON = OR || AND
+
+For all Algorithms `python searchCompare.py CON TERMS`
+
+ALG = BM25F, Frequency, TF_IDF
+
+PagaRank = Optional, default as False. If 'PageRank' is included, results would be return based on the ranking of the pages in descending order.
+
+CON = OR, AND
+
+TERMS = *anything*
